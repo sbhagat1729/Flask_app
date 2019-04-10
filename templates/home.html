@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block title%}
+	{% if title %}
+		<title>home-page-{{title}}</title>
+	{% else %}
+		<title>home page</title>
+	{% endif %}
+{% endblock title %}
+{% block content %}
+	
+	
+	{% if current_username %}
+		<p1>current user - {{ current_username }}</p1>
+		<h1>HOME PAGE</h1>
+		<div class="content-section">
+			<form  action="{{ url_for('logout') }}">
+				<div class ="form-group">
+					{{ LogoutForm.submit(class="btn btn-outline-info") }}
+				</div>
+
+			</form>
+
+		</div>
+		<p>hi..user. How do you do?</p>
+		<div class="content-section">
+			<form  action="{{ url_for('about',current_username = current_username) }}">
+				<div class ="form-group">
+					{{ AboutForm.submit(class="btn btn-outline-info") }}
+				</div>
+
+			</form>
+
+		</div>
+	{% else %}
+		<p> it seems that you have not logged in !!</p>
+		<div class="content-section">
+			<form  action="{{ url_for('login') }}">
+				<div class ="form-group">
+					<p>Please click here to </p>{{ LoginForm.submit(class="btn btn-outline-info") }}
+				</div>
+
+			</form>
+
+		</div>
+	{% endif %}
+
+	
+{% endblock content%}
+
